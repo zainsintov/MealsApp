@@ -8,12 +8,12 @@ import {
   ScrollView,
 } from "react-native";
 import { MEALS } from "../data/dummy-data";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackNavigatorProps } from "../App";
 
-interface MealDetails {
-  route: any;
-}
+type Props = NativeStackScreenProps<StackNavigatorProps, "MealDetails">;
 
-export const MealDetails: FC<MealDetails> = ({ route }) => {
+export const MealDetails = ({ route }: Props) => {
   const id = route.params.mealId;
 
   const displayMeal = MEALS.find((item) => item.id === id);

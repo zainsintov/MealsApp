@@ -2,12 +2,12 @@ import { CATEGORIES } from "../data/dummy-data";
 import { FlatList, View } from "react-native";
 import { FC } from "react";
 import { CategoriesGridTile } from "../components/CategoriesGridTile";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackNavigatorProps } from "../App";
 
-interface CategoriesScreenProps {
-  navigation: any;
-}
+type Props = NativeStackScreenProps<StackNavigatorProps, "CategoriesScreen">;
 
-export const CategoriesScreen: FC<CategoriesScreenProps> = ({ navigation }) => {
+export const CategoriesScreen = ({ navigation }: Props) => {
   const renderItemHelper = ({
     item,
   }: {

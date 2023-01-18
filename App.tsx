@@ -11,7 +11,13 @@ import { MealDetails } from "./screens/MealDetails";
 import { FavoritesScreen } from "./screens/FavoritesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const Stack = createNativeStackNavigator();
+export type StackNavigatorProps = {
+  CategoriesScreen: undefined;
+  MealsOverview: { categoryID: {} };
+  MealDetails: { mealId: {} };
+};
+
+const Stack = createNativeStackNavigator<StackNavigatorProps>();
 const Tab = createBottomTabNavigator();
 
 // const Drawer = createDrawerNavigator();
@@ -25,14 +31,18 @@ const Tab = createBottomTabNavigator();
 //   );
 // };
 
-const TabsMenu = () => {
-  return (
-    <Tab.Navigator>
-      <Tab.Screen name="drawerCategories" component={CategoriesScreen} />
-      <Tab.Screen name="favorites" component={FavoritesScreen} />
-    </Tab.Navigator>
-  );
-};
+// const TabsMenu = () => {
+//   return (
+//     <Tab.Navigator>
+//       <Tab.Screen
+//         name="drawerCategories"
+//         component={CategoriesScreen}
+//         options={{ title: "Home" }}
+//       />
+//       <Tab.Screen name="favorites" component={FavoritesScreen} />
+//     </Tab.Navigator>
+//   );
+// };
 
 export default function App() {
   return (
@@ -40,7 +50,7 @@ export default function App() {
       <StatusBar style="dark" />
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="categories" component={TabsMenu} />
+          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
           <Stack.Screen name="MealsOverview" component={MealsOverview} />
           <Stack.Screen name="MealDetails" component={MealDetails} />
         </Stack.Navigator>

@@ -4,16 +4,12 @@ import { View, Text, FlatList, Pressable } from "react-native";
 import { MEALS } from "../data/dummy-data";
 import { MealDetails } from "./MealDetails";
 import { MealItem } from "./MealItem";
+import { StackNavigatorProps } from "../App";
+import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-interface MealsOverviewProps {
-  route: any;
-  navigation: any;
-}
+type Props = NativeStackScreenProps<StackNavigatorProps, "MealsOverview">;
 
-export const MealsOverview: FC<MealsOverviewProps> = ({
-  route,
-  navigation,
-}) => {
+export const MealsOverview = ({ route, navigation }: Props) => {
   const id = route.params.categoryID;
 
   const displayMeals = MEALS.filter(
