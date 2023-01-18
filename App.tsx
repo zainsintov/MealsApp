@@ -1,20 +1,64 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { CustomButton } from "./components/CustomButton";
+import { CategoriesScreen } from "./screens/CategoriesScreens";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { MealsOverview } from "./screens/MealsOverview";
+import { MealDetails } from "./screens/MealDetails";
+// import { createDrawerNavigator } from "@react-navigation/drawer";
+import { FavoritesScreen } from "./screens/FavoritesScreen";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+
+// const Drawer = createDrawerNavigator();
+
+// const DrawerMenu = () => {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="drawerCategories" component={CategoriesScreen} />
+//       <Drawer.Screen name="favorites" component={FavoritesScreen} />
+//     </Drawer.Navigator>
+//   );
+// };
+
+const TabsMenu = () => {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="drawerCategories" component={CategoriesScreen} />
+      <Tab.Screen name="favorites" component={FavoritesScreen} />
+    </Tab.Navigator>
+  );
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="dark" />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="categories" component={TabsMenu} />
+          <Stack.Screen name="MealsOverview" component={MealsOverview} />
+          <Stack.Screen name="MealDetails" component={MealDetails} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  textContainer: {
+    width: 300,
+    border: "1px solid",
   },
 });
