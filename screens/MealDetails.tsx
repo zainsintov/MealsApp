@@ -10,6 +10,8 @@ import {
 import { MEALS } from "../data/dummy-data";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackNavigatorProps } from "../App";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = NativeStackScreenProps<StackNavigatorProps, "MealDetails">;
 
@@ -28,14 +30,14 @@ export const MealDetails = ({ route }: Props) => {
           <Text style={styles.title}>{displayMeal && displayMeal.title}</Text>
           <Text style={styles.ingredients}>Ingredients</Text>
           {ingredients.map((item: string) => (
-            <Text>
+            <Text key={item}>
               {"\u2022 "}
               {item}
             </Text>
           ))}
           <Text style={styles.ingredients}>Recipe</Text>
           {recipeSteps.map((item: string) => (
-            <Text>
+            <Text key={item}>
               {"\u2022 "}
               {item}
             </Text>

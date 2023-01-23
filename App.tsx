@@ -1,4 +1,4 @@
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
@@ -10,11 +10,14 @@ import { MealDetails } from "./screens/MealDetails";
 // import { createDrawerNavigator } from "@react-navigation/drawer";
 import { FavoritesScreen } from "./screens/FavoritesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { AddMeal } from "./screens/AddMealScreen";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export type StackNavigatorProps = {
   CategoriesScreen: undefined;
   MealsOverview: { categoryID: {} };
   MealDetails: { mealId: {} };
+  AddMeal: undefined;
 };
 
 const Stack = createNativeStackNavigator<StackNavigatorProps>();
@@ -49,10 +52,15 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: "green" },
+          }}
+        >
           <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
           <Stack.Screen name="MealsOverview" component={MealsOverview} />
           <Stack.Screen name="MealDetails" component={MealDetails} />
+          <Stack.Screen name="AddMeal" component={AddMeal} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

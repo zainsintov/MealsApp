@@ -1,6 +1,6 @@
 import { CATEGORIES } from "../data/dummy-data";
-import { FlatList, View } from "react-native";
-import { FC } from "react";
+import { FlatList, TouchableOpacity, View, Text } from "react-native";
+import { FC, useLayoutEffect } from "react";
 import { CategoriesGridTile } from "../components/CategoriesGridTile";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackNavigatorProps } from "../App";
@@ -28,6 +28,20 @@ export const CategoriesScreen = ({ navigation }: Props) => {
       />
     );
   };
+
+  const handleAddMeal = () => {
+    navigation.navigate("AddMeal");
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity onPress={handleAddMeal}>
+          <Text>Add Meal</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, handleAddMeal]);
 
   return (
     <FlatList
