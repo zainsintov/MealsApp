@@ -12,6 +12,8 @@ import { FavoritesScreen } from "./screens/FavoritesScreen";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AddMeal } from "./screens/AddMealScreen";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 export type StackNavigatorProps = {
   CategoriesScreen: undefined;
@@ -22,6 +24,8 @@ export type StackNavigatorProps = {
 
 const Stack = createNativeStackNavigator<StackNavigatorProps>();
 const Tab = createBottomTabNavigator();
+
+const queryClient = new QueryClient();
 
 // const Drawer = createDrawerNavigator();
 
@@ -50,19 +54,25 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "green" },
-          }}
-        >
-          <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
-          <Stack.Screen name="MealsOverview" component={MealsOverview} />
-          <Stack.Screen name="MealDetails" component={MealDetails} />
-          <Stack.Screen name="AddMeal" component={AddMeal} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <StatusBar style="dark" />
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "green" },
+            }}
+          >
+            <Stack.Screen
+              name="CategoriesScreen"
+              component={CategoriesScreen}
+            />
+            <Stack.Screen name="MealsOverview" component={MealsOverview} />
+            <Stack.Screen name="MealDetails" component={MealDetails} />
+            <Stack.Screen name="AddMeal" component={AddMeal} />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+      </QueryClientProvider>
     </>
   );
 }
